@@ -22,4 +22,29 @@ public class Modulbelegung {
 		
 	}
 
+	public String getBelegungsnr() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getNote() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getMatrikelnrFK() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getEDVNrFK() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getMatrikelnummer() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

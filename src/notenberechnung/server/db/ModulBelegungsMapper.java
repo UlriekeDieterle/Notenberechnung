@@ -3,7 +3,9 @@ package notenberechnung.server.db;
 import java.sql.*;
 import java.util.Vector;
 
+import notenberechnung.shared.bo.Modul;
 import notenberechnung.shared.bo.Modulbelegung;
+import notenberechnung.shared.bo.Student;
 
 public class ModulBelegungsMapper {
 
@@ -53,12 +55,133 @@ public class ModulBelegungsMapper {
 		try{
 		Statement smt = con.createStatement();
 		
-		ResultSet rs = smt.executeQuery("SELECT Belegungsnummer, Note, MatrikelnummerFK, EDVNummerFK FROM modulbelegung");
+		ResultSet rs = smt.executeQuery("SELECT Belegungsnummer, Note, MatrikelnummerFK, EDVNummerFK FROM modulbelegung ORDER BY Belegungsnummer");
+		
+		while (rs.next()) {
+			Modulbelegung b = new Modulbelegung();
+			b.setBelegungsnr(rs.getInt("Belegungsnummer"));
+			b.setNote(rs.getDouble("Note"));
+			b.setMatrikelnummerFK(rs.getInt("MatrikelnummerFK"));
+			b.setEDVNr(rs.getInt("EDVNummerFK"));
+			
+			result.addElement(b);
+			
+		}
 	}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
 		return result;
+	}
+	
+	public Vector<Modulbelegung> findByBelegung(int belegungsnr) {
+		Connection con = DBConnection.connection();
+		Vector<Modulbelegung> result = new Vector<Modulbelegung>();
+		
+		try {
+			Statement smt = con.createStatement();
+			ResultSet rs = smt.executeQuery("SELECT Belegungsnummer, Note, MatrikelnummerFK, EDVNummerFK FROM modulbelegung"
+					+ "WHERE Belegungsnummer = " + belegungsnr + "ORDER BY Belegungsnummer");
+			
+			while (rs.next()) {
+				Modulbelegung b = new Modulbelegung();
+				b.setBelegungsnr(rs.getInt("Belegungsnummer"));
+				b.setNote(rs.getDouble("Note"));
+				b.setMatrikelnummerFK(rs.getInt("MatrikelnummerFK"));
+				b.setEDVNr(rs.getInt("EDVNummerFK"));
+				
+				result.addElement(b);
+			}
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public Modulbelegung insert (Modulbelegung b) {
+		Connection con = DBConnection.connection();
+		
+		try {
+			Statement smt = con.createStatement();
+			
+			ResultSet rs = smt.executeQuery("SELECT MAX(Belegungsnummer) AS maxid FROM modulbelegung");
+			if (rs.next()) {
+				b.setBelegungsnr(rs.getInt("maxid" + 1));
+				
+				smt = con.createStatement();
+				smt.executeQuery("INSERT INTO modulbelegung (Belegungsnummer, Note, MatrikelnummerFK, EDVNummerFK"
+						+ "VALUES (" 
+						+ b.getBelegungsnr()
+						+ ","
+						+ b.getNote()
+						+ ","
+						+ b.getMatrikelnrFK()
+						+ ","
+						+ b.getEDVNrFK()
+						+ ")");
+				}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			}
+		
+		return b;
+	}
+	
+	public Modulbelegung update (Modulbelegung b) {
+		Connection con = DBConnection.connection();
+		
+		try {
+			Statement smt = con.createStatement();
+			smt.executeQuery("UPDATE modulbelegung SET " + "Belegungsnummer=\"" + b.getBelegungsnr() + "Note=\"" + b.getNote()
+					+ "MatrikelnummerFK=\"" + b.getMatrikelnrFK() + "EDVNummerFK=\"" + b.getEDVNrFK() + "\"" 
+					+ "WHERE Belegungsnummer = " + b.getBelegungsnr());
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return b;
+	}
+	
+	public void delete (Modulbelegung b) {
+		Connection con = DBConnection.connection();
+		
+		try {
+			Statement smt = con.createStatement();
+			smt.executeQuery("DELETE FROM modulbelegung WHERE Belegungsnummer= " + b.getBelegungsnr());
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteOfModulbelegung (Modulbelegung b) {
+		Connection con = DBConnection.connection();
+		
+		try {
+			Statement smt = con.createStatement();
+			smt.executeQuery("DELETE FROM modulbelegung WHERE MatrikelnummerFK=" + b.getMatrikelnrFK());
+			smt.executeQuery("DELETE FROM modulbelegung WHERE EDVNummerFK=" + b.getEDVNrFK());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public Student getModulbelegungStudent (Modulbelegung b) {
+		return StudentMapper.studentMapper().findByKey(b.getMatrikelnrFK());
+	}
+	
+	public Modul getModulbelegungModul (Modulbelegung b) {
+		return ModulMapper.modulMapper().findByKey(b.getEDVNrFK());
+	}
+
+	public Vector<Modulbelegung> findByStudent(Student s) {
+		
+		return null;
 	}
 }

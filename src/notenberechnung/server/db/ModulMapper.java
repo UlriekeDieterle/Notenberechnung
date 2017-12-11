@@ -8,12 +8,12 @@ import notenberechnung.shared.bo.Student;
 
 public class ModulMapper {
 
-	public ModulMapper modulMapper = null;
+	public static ModulMapper modulMapper = null;
 	
 	protected ModulMapper() {
 	}
 	
-	public ModulMapper modulMapper(){
+	public static ModulMapper modulMapper(){
 		if(modulMapper == null){
 			modulMapper = new ModulMapper();
 		}

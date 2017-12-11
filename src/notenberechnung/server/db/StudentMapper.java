@@ -8,12 +8,12 @@ import notenberechnung.shared.bo.Student;
 
 public class StudentMapper {
 
-	public StudentMapper studentMapper = null;
+	public static StudentMapper studentMapper = null;
 	
 	protected StudentMapper(){
 	}
 	
-	public StudentMapper studentMapper(){
+	public static StudentMapper studentMapper(){
 		
 		if(studentMapper == null){
 			studentMapper = new StudentMapper();
@@ -230,9 +230,10 @@ public class StudentMapper {
 			e.printStackTrace();
 		}
 	}
-	
+	// hier wird Modulbelegung von Student gemacht
 	public Vector<Modulbelegung> getModulbelegungOfStudent (Student s) {
 		return ModulBelegungsMapper.modulbelegungsMapper().findByStudent(s);
 	}
+
 		
 }
