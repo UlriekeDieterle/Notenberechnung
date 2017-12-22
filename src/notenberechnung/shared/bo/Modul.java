@@ -1,71 +1,69 @@
 package notenberechnung.shared.bo;
 
-public class Modul {
+public class Modul extends BusinessObject {
 
+	private static final long serialVersionUID = 1L;
+
+	private int ects = 0;
+	private int id = 0;
+	private String titel = "";
+	private String verantwortl = "";
+	private String zeitp = "";
+	private String beschreibung = "";
 	
 
-	private int ects;
-	private int id;
-
-	public void setId(int i) {
-		// TODO Auto-generated method stub
-		
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public void setECTS(int int1) {
-		// TODO Auto-generated method stub
-		
+	public void setECTS(int e) {
+		this.ects = e;
 	}
 
-	public void setModulTitel(String string) {
-		// TODO Auto-generated method stub
-		
+	public void setModulTitel(String m) {
+		this.titel = m;
 	}
 
-	public void setVerantwortlicher(String string) {
-		// TODO Auto-generated method stub
-		
+	public void setVerantwortlicher(String v) {
+		this.verantwortl = v;
 	}
 
-	public void setZeitpunkt(String string) {
-		// TODO Auto-generated method stub
-		
+	public void setZeitpunkt(String z) {
+		this.zeitp = z;
 	}
 
-	public void setBeschreibung(String string) {
-		// TODO Auto-generated method stub
-		
+	public void setBeschreibung(String b) {
+		this.beschreibung = b;
 	}
 
-	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
+	//----------------------------------------------------------------------------------------------------------------------------
+	public int getId() {
+		return this.id;
 	}
 
-	public String getECTS() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getECTS() {
+		return this.ects;
 	}
 
 	public String getModulTitel() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.titel;
 	}
 
 	public String getVerantwortlicher() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.verantwortl;
 	}
 
 	public String getZeitpunkt() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.zeitp;
 	}
 
 	public String getBeschreibung() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.beschreibung;
 	}
 
 		
+	@Override
+	public String toString() {
+	    return super.toString() + " " + this.id + " " + this.ects + " " + this.titel + " " + this.verantwortl + " " + this.zeitp + " " + this.beschreibung;
+	  }
 }

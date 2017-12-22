@@ -1,50 +1,49 @@
 package notenberechnung.shared.bo;
 
-public class Modulbelegung {
+public class Modulbelegung extends BusinessObject{
 
-	public void setBelegungsnr(int int1) {
-		// TODO Auto-generated method stub
-		
+	private static final long serialVersionUID = 1L;
+	
+	private int belegung = 0;
+	private double note = 0;
+	private int matrikelnr = 0;
+	private int edvnr = 0;
+	
+	public void setBelegungsnr(int bnr) {
+		this.belegung = bnr;
 	}
 
-	public void setNote(double double1) {
-		// TODO Auto-generated method stub
-		
+	public void setNote(double n) {
+		this.note = n;
 	}
 
-	public void setMatrikelnummerFK(int int1) {
-		// TODO Auto-generated method stub
-		
+	public void setMatrikelnummerFK(int mfk) {
+		this.matrikelnr = mfk;
 	}
 
-	public void setEDVNr(int int1) {
-		// TODO Auto-generated method stub
-		
+	public void setEDVNr(int efk) {
+		this.edvnr = efk;
 	}
 
-	public String getBelegungsnr() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getBelegungsnr() {
+		return this.belegung;
 	}
 
-	public String getNote() {
-		// TODO Auto-generated method stub
-		return null;
+	public double getNote() {
+		return this.note;
 	}
 
 	public int getMatrikelnrFK() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.matrikelnr;
 	}
 
 	public int getEDVNrFK() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.edvnr;
 	}
-
-	public int getMatrikelnummer() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
+	@Override
+	public String toString() {
+	    return super.toString() + " " + this.belegung + " " + this.note + " " + this.matrikelnr + " " + this.edvnr;
+	  }
 
 }

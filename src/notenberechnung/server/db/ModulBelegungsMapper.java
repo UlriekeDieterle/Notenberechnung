@@ -11,13 +11,14 @@ public class ModulBelegungsMapper {
 
 	private static ModulBelegungsMapper modulbelegungsMapper = null;
 	
+	// Konstruktor für Mapper
 	protected ModulBelegungsMapper() {
 		
 	}
 
 	public static ModulBelegungsMapper modulbelegungsMapper() {
 		if(modulbelegungsMapper == null) {
-			ModulBelegungsMapper modulbelegungsMapper = new ModulBelegungsMapper();
+			modulbelegungsMapper = new ModulBelegungsMapper();
 		}
 		return modulbelegungsMapper;
 	}

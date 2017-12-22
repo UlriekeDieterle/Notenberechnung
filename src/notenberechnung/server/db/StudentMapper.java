@@ -32,14 +32,14 @@ public class StudentMapper {
 	    			.executeQuery("SELECT Matrikelnummer, Vorname, Nachname, Geburtsdatum, Geschlecht, HdM_Kuerzel, Studiengang" + " FROM student "
               + "WHERE Matrikelnummer =" + id + " ORDER BY Nachname");
 	    	
-	    	// Methoden set... werden in BO Klasse Student auch gebraucht
+	    	// Methoden set... werden in BO Klasse Student auch gebraucht; sind dort Konstruktoren?
 	    	if (rs.next()) {
 	    		Student s = new Student();
 	    		s.setId(rs.getInt("Matrikelnummer"));
 	            s.setFirstName(rs.getString("Vorname"));
 	            s.setLastName(rs.getString("Nachname"));
 	            s.setGender(rs.getBoolean("Geschlecht"));
-	            s.setBirthday(rs.getInt("Geburtstag"));
+	            s.setBirthday(rs.getInt("Geburtsdatum"));
 	            s.setKuerzel(rs.getString("HdM_Kuerzel"));
 	            s.setStudies(rs.getString("Studiengang"));
 	            

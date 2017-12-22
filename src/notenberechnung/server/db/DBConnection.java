@@ -1,15 +1,13 @@
 package notenberechnung.server.db;
 
-import java.sql.DriverManager;
 import java.sql.*;
 
 import com.google.appengine.api.utils.SystemProperty;
-import com.google.cloud.sql.jdbc.Connection;
 
 public class DBConnection {
 
-	private static Connection con = null;
-	private static String localURL = "http://localhost/phpmyadmin/db_export.php?db=notenberechnung";	
+	private static java.sql.Connection con = null;
+	private static String localURL = "jdbc:mysql://127.0.0.1:3306/Notenberechnung?user=root&password=";	
 	
 	public static Connection connection(){
 		  if (con == null) {
@@ -25,7 +23,7 @@ public class DBConnection {
 	                    url = localURL;
 	                }
 	                
-	                con = (Connection) DriverManager.getConnection(url);
+	                con = DriverManager.getConnection(url);
 	            } catch (Exception e) {
 	                con = null;
 	                e.printStackTrace();
