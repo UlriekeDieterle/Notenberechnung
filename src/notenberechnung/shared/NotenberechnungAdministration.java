@@ -1,5 +1,10 @@
 package notenberechnung.shared;
 
-public class NotenberechnungAdministration {
+import notenberechnung.shared.bo.Student;
+
+public interface NotenberechnungAdministration {
+
+	Student login(String requestUri) throws IllegalArgumentException;
+	
 
 }

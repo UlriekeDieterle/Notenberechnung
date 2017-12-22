@@ -28,8 +28,8 @@ public class ModulBelegungsMapper {
 		
 		try {
 			Statement smt = con.createStatement();
-			ResultSet rs = smt.executeQuery("SELECT Belegungsnummer, Note, MatrikelnummerFK, EDVNummerFK FROM modulbelegung"
-					+ "WHERE Belegungsnummer =" + id + "ORDER BY Belegungsnummer");
+			ResultSet rs = smt.executeQuery("SELECT Belegungsnummer, Note, MatrikelnummerFK, EDVNummerFK" + " FROM modulbelegung "
+					+ "WHERE Belegungsnummer =" + id + " ORDER BY Belegungsnummer");
 			
 			if(rs.next()) {
 				Modulbelegung b = new Modulbelegung();
@@ -110,20 +110,20 @@ public class ModulBelegungsMapper {
 			
 			ResultSet rs = smt.executeQuery("SELECT MAX(Belegungsnummer) AS maxid FROM modulbelegung");
 			if (rs.next()) {
-				b.setBelegungsnr(rs.getInt("maxid" + 1));
+				b.setBelegungsnr(rs.getInt("maxid") + 1);
 				
 				smt = con.createStatement();
-				smt.executeQuery("INSERT INTO modulbelegung (Belegungsnummer, Note, MatrikelnummerFK, EDVNummerFK"
-						+ "VALUES (" 
+				smt.executeUpdate("INSERT INTO modulbelegung (Belegungsnummer, Note, MatrikelnummerFK, EDVNummerFK)"
+						+ " VALUES (" 
 						+ b.getBelegungsnr()
-						+ ","
+						+ ", "
 						+ b.getNote()
-						+ ","
+						+ ", "
 						+ b.getMatrikelnrFK()
-						+ ","
+						+ ", "
 						+ b.getEDVNrFK()
 						+ ")");
-				}
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

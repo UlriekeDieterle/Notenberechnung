@@ -27,8 +27,15 @@ public class ModulMapper {
 		try{
 			// Wird über Import von java.sql.* reingeholt, also schon fertig
 			Statement smt = con.createStatement();
-			ResultSet rs = smt.executeQuery("SELECT EDV_Nummer, ECTS, Titel_des_Moduls, Modulverantwortlicher, Zeitpunkt_Leistungserbringung, Beschreibung"
-					+ "FROM modul "+ "WHERE EDV_Nummer =" + id + "ORDER BY Titel_des_Moduls");
+			ResultSet rs = smt.executeQuery("SELECT EDV_Nummer, ECTS, Titel_des_Moduls, Modulverantwortlicher, Zeitpunkt_Leistungserbringung, Beschreibung "
+					+ "FROM modul "+ "WHERE EDV_Nummer =" + id + " ORDER BY Titel_des_Moduls");
+			
+			/*stmt.executeUpdate("INSERT INTO profil (ProfilID, LastName, DriversLicense, Email, FirstName) " + "VALUES ("
+					+ p.getID() + ",'" 
+					+ p.getLastName() + "', " 
+					+ p.getDriversLicence() + ", '" 
+					+ p.getEmail() + "', '"
+					+ p.getFirstName() + "')");*/
 			
 			if(rs.next()) {
 				Modul m = new Modul();
@@ -173,8 +180,14 @@ public class ModulMapper {
 			if(rs.next()){
 				m.setId(rs.getInt("maxid") +1);
 				smt = con.createStatement();
-				smt.executeQuery("INSERT INTO modul (EDV_Nummer, ECTS, Titel_des_Moduls, Modulverantwortlicher, Zeitpunkt_Leistungserbringung, Beschreibung)"
-						+ "VALUES (" + m.getId() + ",'" + m.getECTS() + "','" + m.getModulTitel() + "','" + m.getVerantwortlicher() + "','" + m.getZeitpunkt() + "','" + m.getBeschreibung() + "','" + "");
+				smt.executeUpdate("INSERT INTO modul (EDV_Nummer, ECTS, Titel_des_Moduls, Modulverantwortlicher, Zeitpunkt_Leistungserbringung, Beschreibung)"
+						+ " VALUES (" 
+						+ m.getId() + "," 
+						+ m.getECTS() + ",'" 
+						+ m.getModulTitel() + "','" 
+						+ m.getVerantwortlicher() + "','" 
+						+ m.getZeitpunkt() + "','" 
+						+ m.getBeschreibung() + "')");
 			
 			}
 			
@@ -192,7 +205,7 @@ public class ModulMapper {
 		try {
 			Statement smt = con.createStatement();
 			
-			smt.executeQuery("UPDATE student " + "SET ECTS=\"" + m.getECTS() + "\", " + "Titel_des_Moduls =\"" + m.getModulTitel() + "\","  + "SET Modulverantwortlicher =\"" + m.getVerantwortlicher() + "\"," + "SET Zeitpunkt_Leistungserbringung =\"" + m.getZeitpunkt() + "\"," + "SET Beschreibung =\"" + m.getBeschreibung() + "\" "+ "WHERE EDV_Nummer = " + m.getId());
+			smt.executeUpdate("UPDATE student " + "SET ECTS=\"" + m.getECTS() + "\", " + "Titel_des_Moduls =\"" + m.getModulTitel() + "\","  + "SET Modulverantwortlicher =\"" + m.getVerantwortlicher() + "\"," + "SET Zeitpunkt_Leistungserbringung =\"" + m.getZeitpunkt() + "\"," + "SET Beschreibung =\"" + m.getBeschreibung() + "\" "+ "WHERE EDV_Nummer = " + m.getId());
 			
 		}
 		catch (SQLException e) {

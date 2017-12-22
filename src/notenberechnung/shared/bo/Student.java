@@ -7,9 +7,13 @@ public class Student extends BusinessObject {
 	private int birthday = 0;
 	private String firstName = "";
 	private String lastName = "";
-	private boolean gender;
+	private String email = "";
 	private String kuerzel = "";
 	private String study = "";
+	
+	private boolean loggedIn = false;
+	private String loginUrl = "";
+	private String logoutUrl = "";
 
 	public void setId(int id1) {
 		this.id = id1;
@@ -25,8 +29,8 @@ public class Student extends BusinessObject {
 		this.lastName = lastname;
 	}
 
-	public void setGender(boolean gender1) {
-		this.gender = gender1;
+	public void setEmail(String e) {
+		this.email = e;
 	}
 
 	public void setBirthday(int birthd) {
@@ -58,8 +62,8 @@ public class Student extends BusinessObject {
 		return this.birthday;
 	}
 
-	public Boolean getGender() {
-		return this.gender;
+	public String getEmail() {
+		return this.email;
 	}
 
 	public String getKuerzel() {
@@ -74,4 +78,18 @@ public class Student extends BusinessObject {
 	public String toString() {
 	    return super.toString() + " " + this.id + " " + this.firstName + " " + this.lastName + " " + this.birthday + " " + this.kuerzel + " " + this.study;
 	  }
+
+	public void setLoggedIn(boolean b) {
+		this.loggedIn = b;
+	}
+
+	public void setLogoutUrl(String logoutURL) {
+		this.logoutUrl = logoutURL;
+	}
+
+	public void setLoginUrl(String loginURL) {
+		this.loginUrl = loginURL;		
+	}
+	
+
 }

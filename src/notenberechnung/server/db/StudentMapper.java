@@ -28,9 +28,8 @@ public class StudentMapper {
 	    try {
 	    	Statement smt = con.createStatement();
 	    	
-	    	ResultSet rs = smt
-	    			.executeQuery("SELECT Matrikelnummer, Vorname, Nachname, Geburtsdatum, Geschlecht, HdM_Kuerzel, Studiengang" + " FROM student "
-              + "WHERE Matrikelnummer =" + id + " ORDER BY Nachname");
+	    	ResultSet rs = smt.executeQuery("SELECT Matrikelnummer, Vorname, Nachname, EMail, Geburtsdatum, HdM_Kuerzel, Studiengang" + " FROM student "
+	    			+ "WHERE Matrikelnummer =" + id + " ORDER BY Nachname");
 	    	
 	    	// Methoden set... werden in BO Klasse Student auch gebraucht; sind dort Konstruktoren?
 	    	if (rs.next()) {
@@ -38,7 +37,7 @@ public class StudentMapper {
 	    		s.setId(rs.getInt("Matrikelnummer"));
 	            s.setFirstName(rs.getString("Vorname"));
 	            s.setLastName(rs.getString("Nachname"));
-	            s.setGender(rs.getBoolean("Geschlecht"));
+	            s.setEmail(rs.getString("EMail"));
 	            s.setBirthday(rs.getInt("Geburtsdatum"));
 	            s.setKuerzel(rs.getString("HdM_Kuerzel"));
 	            s.setStudies(rs.getString("Studiengang"));
@@ -64,16 +63,16 @@ public class StudentMapper {
 		try {
 			Statement smt = con.createStatement();
 			
-			ResultSet rs = smt.executeQuery("SELECT Matrikelnummer, Vorname, Nachname, Geburtsdatum, Geschlecht, HdM_Kuerzel, Studiengang " 
-			+ "FROM student " + "ORDER BY Matrikelnummer");
+			ResultSet rs = smt.executeQuery("SELECT Matrikelnummer, Vorname, Nachname, EMail, Geburtsdatum, HdM_Kuerzel, Studiengang " 
+			+ " FROM student " + "ORDER BY Matrikelnummer");
 			
 			while (rs.next()) {
 				Student s = new Student();
 				s.setId(rs.getInt("Matrikelnummer"));
 				s.setFirstName(rs.getString("Vorname"));
 				s.setLastName(rs.getString("Nachname"));
+				s.setEmail(rs.getString("EMail"));
 				s.setBirthday(rs.getInt("Geburtsdatum"));
-				s.setGender(rs.getBoolean("Geschlecht"));
 				s.setKuerzel(rs.getString("HdM_Kuerzel"));
 				s.setStudies(rs.getString("Studiengang"));
 				
@@ -94,16 +93,16 @@ public class StudentMapper {
 		try {
 			Statement smt = con.createStatement();
 			
-			ResultSet rs = smt.executeQuery("SELECT Matrikelnummer, Vorname, Nachname, Geburtsdatum, Geschlecht, HdM_Kuerzel, Studiengang"
-					+ "FROM student WHERE Nachname LIKE " + name + " ORDERBY Nachname");
-			
+			ResultSet rs = smt.executeQuery("SELECT Matrikelnummer, Vorname, Nachname, EMail, Geburtsdatum, HdM_Kuerzel, Studiengang"
+					+ " FROM student" + " WHERE Nachname LIKE '" + name + "' ORDER BY Nachname");
+						
 			while (rs.next()){
 				Student s = new Student();
 				s.setId(rs.getInt("Matrikelnummer"));
 				s.setFirstName(rs.getString("Vorname"));
 				s.setLastName(rs.getString("Nachname"));
+				s.setEmail(rs.getString("EMail"));
 				s.setBirthday(rs.getInt("Geburtsdatum"));
-				s.setGender(rs.getBoolean("Geschlecht"));
 				s.setKuerzel(rs.getString("HdM_Kuerzel"));
 				s.setStudies(rs.getString("Studiengang"));
 				
@@ -119,28 +118,29 @@ public class StudentMapper {
 		return result;
 	}
 	
-	public Vector<Student> findByGeschlecht (Boolean geschlecht) {
+	public Student findByEmail (String email) {
 		Connection con = DBConnection.connection();
 		Vector<Student> result = new Vector<Student>();
 		
 		try {
 			Statement smt = con.createStatement();
 			
-			ResultSet rs = smt.executeQuery("SELECT Matrikelnummer, Vorname, Nachname, Geburtsdatum, Geschlecht, HdM_Kuerzel, Studiengang"
-					+ "FROM student WHERE Geschlecht LIKE " + geschlecht + " ORDERBY Nachname");
+			ResultSet rs = smt.executeQuery("SELECT Matrikelnummer, Vorname, Nachname, EMail, Geburtsdatum, HdM_Kuerzel, Studiengang"
+					+ " FROM student" + " WHERE EMail LIKE '" + email + "'");
 			
 			while (rs.next()){
 				Student s = new Student();
 				s.setId(rs.getInt("Matrikelnummer"));
 				s.setFirstName(rs.getString("Vorname"));
 				s.setLastName(rs.getString("Nachname"));
+				s.setEmail(rs.getString ("EMail"));
 				s.setBirthday(rs.getInt("Geburtsdatum"));
-				s.setGender(rs.getBoolean("Geschlecht"));
 				s.setKuerzel(rs.getString("HdM_Kuerzel"));
 				s.setStudies(rs.getString("Studiengang"));
 				
 				result.addElement(s);
 				
+				//return result;
 			}
 		}
 		
@@ -148,7 +148,7 @@ public class StudentMapper {
 				e.printStackTrace();
 		}
 		
-		return result;
+		return null;
 	}
 	
 	public Vector<Student> findByStudiengang (String studiengang) {
@@ -158,16 +158,16 @@ public class StudentMapper {
 		try {
 			Statement smt = con.createStatement();
 			
-			ResultSet rs = smt.executeQuery("SELECT Matrikelnummer, Vorname, Nachname, Geburtsdatum, Geschlecht, HdM_Kuerzel, Studiengang"
-					+ "FROM student WHERE Studiengang LIKE " + studiengang + " ORDERBY Nachname");
+			ResultSet rs = smt.executeQuery("SELECT Matrikelnummer, Vorname, Nachname, EMail, Geburtsdatum, HdM_Kuerzel, Studiengang"
+					+ " FROM student" + " WHERE Studiengang LIKE '" + studiengang + "' ORDER BY Nachname");
 			
 			while (rs.next()){
 				Student s = new Student();
 				s.setId(rs.getInt("Matrikelnummer"));
 				s.setFirstName(rs.getString("Vorname"));
 				s.setLastName(rs.getString("Nachname"));
+				s.setEmail(rs.getString("EMail"));
 				s.setBirthday(rs.getInt("Geburtsdatum"));
-				s.setGender(rs.getBoolean("Geschlecht"));
 				s.setKuerzel(rs.getString("HdM_Kuerzel"));
 				s.setStudies(rs.getString("Studiengang"));
 				
@@ -193,9 +193,20 @@ public class StudentMapper {
 			if(rs.next()){
 				s.setId(rs.getInt("maxid") +1);
 				smt = con.createStatement();
-				smt.executeUpdate("INSERT INTO student (Matrikelnummer, Vorname, Nachname, Geburtsdatum, Geschlecht, HdM_Kuerzel, Studiengang)"
-						+ "VALUES (" + s.getId() + ",'" + s.getFirstName() + "','" + s.getLastName() + "','" + s.getBirthday() + "','" + s.getGender() + "','" + s.getKuerzel() + "','" + s.getStudies() + "");
-			}
+				
+				// nur Strings mit '' einfügen, Rest ohne!
+				//System.out.println(test);
+				smt.executeUpdate("INSERT INTO student (Matrikelnummer, Vorname, Nachname, EMail, Geburtsdatum, HdM_Kuerzel, Studiengang) "
+						+ "VALUES (" 
+						+ s.getId() + ",'" 
+						+ s.getFirstName() + "', '" 
+						+ s.getLastName() + "', '" 
+						+ s.getEmail() + "', "
+						+ s.getBirthday() + ", '" 
+						+ s.getKuerzel() + "', '" 
+						+ s.getStudies() + "')");
+				
+				}
 		}
 		catch (SQLException e) {
 		      e.printStackTrace();
@@ -209,7 +220,10 @@ public class StudentMapper {
 		
 		try {
 		Statement smt = con.createStatement();
-		smt.executeQuery("UPDATE student " + "SET Vorname=\"" + s.getFirstName() + "\", " + "Nachname=\"" + s.getLastName() + "\","  + "SET Geburtsdatum=\"" + s.getBirthday() + "\"," + "SET Geschlecht=\"" + s.getGender() + "\"," + "SET HdM_Kuerzel=\"" + s.getKuerzel() + "\"," + "SET Studiengang=\"" + s.getStudies() + "\" "+ "WHERE Matrikelnummer= " + s.getId());
+		smt.executeUpdate("UPDATE student " + "SET Vorname=\"" + s.getFirstName() + "\", " + "Nachname=\"" 
+				+ s.getLastName() + "\"," + "EMail=\"" + s.getEmail() + "\"," + "SET Geburtsdatum=\"" 
+				+ s.getBirthday() + "\"," + "SET HdM_Kuerzel=\"" + s.getKuerzel() + "\"," + "SET Studiengang=\"" 
+				+ s.getStudies() + "\" "+ " WHERE Matrikelnummer = " + s.getId());
 		}
 		
 		catch (SQLException e) {
@@ -224,7 +238,7 @@ public class StudentMapper {
 		
 		try {
 			Statement smt = con.createStatement();
-			smt.executeQuery("DELETE FROM student WHERE Matrikelnummer=" + s.getId());
+			smt.executeQuery("DELETE FROM student WHERE Matrikelnummer = " + s.getId());
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
