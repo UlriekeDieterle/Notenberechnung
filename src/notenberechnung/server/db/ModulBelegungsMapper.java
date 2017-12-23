@@ -137,9 +137,9 @@ public class ModulBelegungsMapper {
 		
 		try {
 			Statement smt = con.createStatement();
-			smt.executeQuery("UPDATE modulbelegung SET " + "Belegungsnummer=\"" + b.getBelegungsnr() + "Note=\"" + b.getNote()
-					+ "MatrikelnummerFK=\"" + b.getMatrikelnrFK() + "EDVNummerFK=\"" + b.getEDVNrFK() + "\"" 
-					+ "WHERE Belegungsnummer = " + b.getBelegungsnr());
+			smt.executeUpdate("UPDATE modulbelegung SET " + "Belegungsnummer = " + b.getBelegungsnr() + ", Note = " + b.getNote()
+					+ ", MatrikelnummerFK = " + b.getMatrikelnrFK() + ", EDVNummerFK = " + b.getEDVNrFK()
+					+ " WHERE Belegungsnummer = " + b.getBelegungsnr());
 			
 			
 		} catch (SQLException e) {
@@ -154,7 +154,7 @@ public class ModulBelegungsMapper {
 		
 		try {
 			Statement smt = con.createStatement();
-			smt.executeQuery("DELETE FROM modulbelegung WHERE Belegungsnummer= " + b.getBelegungsnr());
+			smt.executeUpdate("DELETE FROM modulbelegung" + " WHERE Belegungsnummer = " + b.getBelegungsnr());
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -166,8 +166,8 @@ public class ModulBelegungsMapper {
 		
 		try {
 			Statement smt = con.createStatement();
-			smt.executeQuery("DELETE FROM modulbelegung WHERE MatrikelnummerFK=" + b.getMatrikelnrFK());
-			smt.executeQuery("DELETE FROM modulbelegung WHERE EDVNummerFK=" + b.getEDVNrFK());
+			smt.executeUpdate("DELETE FROM modulbelegung" + " WHERE MatrikelnummerFK = " + b.getMatrikelnrFK());
+			smt.executeUpdate("DELETE FROM modulbelegung" + " WHERE EDVNummerFK = " + b.getEDVNrFK());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

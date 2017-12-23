@@ -220,11 +220,12 @@ public class StudentMapper {
 		
 		try {
 		Statement smt = con.createStatement();
-		smt.executeUpdate("UPDATE student " + "SET Vorname=\"" + s.getFirstName() + "\", " + "Nachname=\"" 
-				+ s.getLastName() + "\"," + "EMail=\"" + s.getEmail() + "\"," + "SET Geburtsdatum=\"" 
-				+ s.getBirthday() + "\"," + "SET HdM_Kuerzel=\"" + s.getKuerzel() + "\"," + "SET Studiengang=\"" 
-				+ s.getStudies() + "\" "+ " WHERE Matrikelnummer = " + s.getId());
-		}
+		smt.executeUpdate("UPDATE student SET " + "Vorname= '" + s.getFirstName() + "', " + "Nachname= '" 
+				+ s.getLastName() + "', " + "EMail= '" + s.getEmail() + "', " + "Geburtsdatum= " 
+				+ s.getBirthday() + ", " + "HdM_Kuerzel= '" + s.getKuerzel() + "', " + "Studiengang= '" 
+				+ s.getStudies() + "' " + " WHERE Matrikelnummer = " + s.getId());
+		
+	}
 		
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -238,7 +239,7 @@ public class StudentMapper {
 		
 		try {
 			Statement smt = con.createStatement();
-			smt.executeQuery("DELETE FROM student WHERE Matrikelnummer = " + s.getId());
+			smt.executeUpdate("DELETE FROM student " + "WHERE Matrikelnummer = " + s.getId());
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
