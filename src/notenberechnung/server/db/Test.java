@@ -32,16 +32,16 @@ public class Test {
 		
 		
 		
-		/*ModulMapper mm = new ModulMapper();
+		ModulMapper mm = new ModulMapper();
 		//System.out.println(mm.findByKey(12345));
 		Modul m = new Modul();
 		m.setId(12346);
 		m.setECTS(10);
 		m.setModulTitel("Big Data");
-		m.setVerantwortlicher("Meth");
+		m.setVerantwortlicher("Hendrik Meth");
 		m.setZeitpunkt("Haupt");
-		m.setBeschreibung("Big Data halt");
-		mm.update(m);*/
+		m.setBeschreibung("Big Data");
+		mm.update(m);
 		
 		/*ModulBelegungsMapper mbm = new ModulBelegungsMapper();
 		//System.out.println(bm.findByKey(1));

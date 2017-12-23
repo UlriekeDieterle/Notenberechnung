@@ -205,9 +205,9 @@ public class ModulMapper {
 		try {
 			Statement smt = con.createStatement();
 			
-			smt.executeUpdate("UPDATE student SET " + "ECTS= " + m.getECTS() + ", " + "Titel_des_Moduls = '" + m.getModulTitel() + "', "  
-					+ "Modulverantwortlicher = '" + m.getVerantwortlicher() + "', " + "Zeitpunkt_Leistungserbringung = '" + m.getZeitpunkt() + "', " + "Beschreibung = '" 
-					+ m.getBeschreibung() + "' "+ "WHERE EDV_Nummer = " + m.getId());
+			smt.executeUpdate("UPDATE modul SET " + "ECTS= " + m.getECTS() + ", " + "Titel_des_Moduls = '" + m.getModulTitel() + "', "  
+			+ "Modulverantwortlicher = '" + m.getVerantwortlicher() + "', " + "Zeitpunkt_Leistungserbringung = '" + m.getZeitpunkt() + "', " + "Beschreibung = '" 
+			+ m.getBeschreibung() + "' "+ "WHERE EDV_Nummer = " + m.getId());
 			
 		}
 		catch (SQLException e) {
