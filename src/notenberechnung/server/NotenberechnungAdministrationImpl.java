@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.Vector;
 import java.util.concurrent.ThreadLocalRandom;
 
 import notenberechnung.server.db.ModulBelegungsMapper;
@@ -100,6 +101,7 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		
 		@Override
 		public void delete (Student student) throws IllegalArgumentException {
+			modulbelegungsMapper.deleteOfModulbelegung(student);
 			studentMapper.delete(student);
 		}
 		
@@ -109,7 +111,7 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		}
 		
 		@Override
-		public ArrayList<Student> getAllProfiles() throws IllegalArgumentException {
+		public Vector<Student> getAllProfiles() throws IllegalArgumentException {
 			return studentMapper.findAll();
 		}
 		
@@ -148,7 +150,7 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		}
 		
 		@Override
-		public ArrayList<Modul> getAllModule() throws IllegalArgumentException {
+		public Vector<Modul> getAllModule() throws IllegalArgumentException {
 			return modulMapper.findAll();
 		}
 		
@@ -175,7 +177,10 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		}
 		
 		@Override
-		public 
+		public void delete (Modulbelegung belegung) throws IllegalArgumentException {
+			modulbelegungsMapper.delete(belegung);
+			
+		}
 		
 		
 		

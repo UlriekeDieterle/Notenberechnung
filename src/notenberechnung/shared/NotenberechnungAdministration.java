@@ -1,6 +1,7 @@
 package notenberechnung.shared;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import notenberechnung.shared.bo.Modul;
 import notenberechnung.shared.bo.Modulbelegung;
@@ -17,7 +18,7 @@ public interface NotenberechnungAdministration {
 
 	void save(Student student) throws IllegalArgumentException;
 
-	ArrayList<Student> getAllProfiles() throws IllegalArgumentException;
+	Vector<Student> getAllProfiles() throws IllegalArgumentException;
 
 	Student getStudentByID(int id) throws IllegalArgumentException;
 
@@ -30,9 +31,13 @@ public interface NotenberechnungAdministration {
 
 	void save(Modul modul) throws IllegalArgumentException;
 
-	ArrayList<Modul> getAllModule() throws IllegalArgumentException;
+	Vector<Modul> getAllModule() throws IllegalArgumentException;
 
 	Modulbelegung createBelegung(int belegung, double note, int matnrfk, int edvnrfk) throws IllegalArgumentException;
+
+	Modul getModulByID(int id) throws IllegalArgumentException;
+
+	void delete(Modulbelegung belegung) throws IllegalArgumentException;
 
 	
 	
