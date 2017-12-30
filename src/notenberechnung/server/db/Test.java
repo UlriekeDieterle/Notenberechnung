@@ -11,9 +11,9 @@ public class Test {
 		//System.out.println(sm.findByKey(29489));
 		
 		
-		/*Student s = new Student();
-		s.setId(12345);
-		sm.delete(s);
+		//Student s = new Student();
+		//s.setId(12345);
+		/*sm.delete(s);
 		s.setId(29491);
 		s.setFirstName("Vanessa");
 		s.setLastName("Hammel");
@@ -22,6 +22,8 @@ public class Test {
 		s.setKuerzel("gh589");
 		s.setStudies("OMM");
 		sm.update(s);*/
+		
+		//System.out.println(sm.getModulbelegungOfStudent(s));
 		
 		
 		//System.out.println(sm.findAll());
@@ -32,26 +34,27 @@ public class Test {
 		
 		
 		
-		ModulMapper mm = new ModulMapper();
+		/*ModulMapper mm = new ModulMapper();
 		//System.out.println(mm.findByKey(12345));
 		Modul m = new Modul();
-		m.setId(12346);
-		m.setECTS(10);
+		m.setId(12345);
+		/*m.setECTS(10);
 		m.setModulTitel("Big Data");
 		m.setVerantwortlicher("Hendrik Meth");
 		m.setZeitpunkt("Haupt");
 		m.setBeschreibung("Big Data");
 		mm.update(m);
+		System.out.println(mm.findModulbelegungByModul(m));*/
 		
 		/*ModulBelegungsMapper mbm = new ModulBelegungsMapper();
 		//System.out.println(bm.findByKey(1));
 		Modulbelegung mb = new Modulbelegung();
-		mb.setBelegungsnr(3);
-		//mb.setNote(1.5);
-		//mb.setMatrikelnummerFK(12345);
-		//mb.setEDVNr(12345);
-		mbm.delete(mb);*/
-		
+		mb.setBelegungsnr(2);
+		mb.setNote(1.5);
+		mb.setMatrikelnummerFK(29489);
+		mb.setEDVNr(12345);
+System.out.println(mbm.getModulbelegungStudent(mb));
+System.out.println(mbm.getModulbelegungModul(mb));*/
 		
 	}
 }

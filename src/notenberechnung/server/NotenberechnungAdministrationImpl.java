@@ -48,6 +48,7 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		
 	}
 	
+	// Login-Versuch
 	@Override
 	public Student login (String requestUri) {
 		UserService userService = UserServiceFactory.getUserService();
@@ -80,6 +81,7 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 	       return student;
 	   }
 	
+	//Student
 		@Override
 		public Student createStudent (int id, String vorname, String nachname, String email, int gebdatum, 
 				String kuerzel, String studiengang) throws IllegalArgumentException {
@@ -101,7 +103,7 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		
 		@Override
 		public void delete (Student student) throws IllegalArgumentException {
-			modulbelegungsMapper.deleteOfModulbelegung(student);
+			modulbelegungsMapper.getModulbelegungOfStudent(student);
 			studentMapper.delete(student);
 		}
 		
@@ -125,7 +127,7 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 			return studentMapper.findByEmail(email);
 		}
 		
-		
+		//Modul
 		@Override
 		public Modul createModul (int id, int ects, String titel, String verantwortl, String zeitpunkt, String beschreibung) throws IllegalArgumentException {
 			Modul m = new Modul();
@@ -164,7 +166,7 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 			return ;
 		}*/
 		
-		
+		//Modulbelegung
 		@Override
 		public Modulbelegung createBelegung(int belegung, double note, int matnrfk, int edvnrfk) throws IllegalArgumentException {
 			Modulbelegung mb = new Modulbelegung();

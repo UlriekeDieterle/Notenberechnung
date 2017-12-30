@@ -182,7 +182,63 @@ public class ModulBelegungsMapper {
 	}
 
 	public Vector<Modulbelegung> findByStudent(Student s) {
+		return findByStudent(s.getId());
+	}
+
+	private Vector<Modulbelegung> findByStudent(int id) {
+		Connection con = DBConnection.connection();
+		Vector<Modulbelegung> result = new Vector<Modulbelegung>();
 		
-		return null;
+		try {
+			Statement smt = con.createStatement();
+			ResultSet rs = smt.executeQuery("SELECT Belegungsnummer, Note, MatrikelnummerFK, EDVNummerFK FROM modulbelegung"
+					+ " WHERE MatrikelnummerFK = " + id);
+						
+			while (rs.next()) {
+				Modulbelegung mb = new Modulbelegung();
+				mb.setBelegungsnr(rs.getInt("Belegungsnummer"));
+				mb.setNote(rs.getDouble("Note"));
+				mb.setMatrikelnummerFK(rs.getInt("MatrikelnummerFK"));
+				mb.setEDVNr(rs.getInt("EDVNummerFK"));
+				
+				result.addElement(mb);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
+
+	public Vector<Modulbelegung> findByModul(Modul m) {
+
+		return findByModul(m.getId());
+	}
+
+	private Vector<Modulbelegung> findByModul(int id) {
+		Connection con = DBConnection.connection();
+		Vector<Modulbelegung> result = new Vector<Modulbelegung>();
+		
+		try {
+			Statement smt = con.createStatement();
+			ResultSet rs = smt.executeQuery("SELECT Belegungsnummer, Note, MatrikelnummerFK, EDVNummerFK FROM modulbelegung"
+					+ " WHERE EDVNummerFK = " + id);
+			
+			while (rs.next()) {
+				Modulbelegung mb = new Modulbelegung();
+				mb.setBelegungsnr(rs.getInt("Belegungsnummer"));
+				mb.setNote(rs.getDouble("Note"));
+				mb.setMatrikelnummerFK(rs.getInt("MatrikelnummerFK"));
+				mb.setEDVNr(rs.getInt("EDVNummerFK"));
+				
+				result.addElement(mb);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 }

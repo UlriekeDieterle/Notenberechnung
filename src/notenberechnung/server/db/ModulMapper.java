@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.Vector;
 
 import notenberechnung.shared.bo.Modul;
+import notenberechnung.shared.bo.Modulbelegung;
 import notenberechnung.shared.bo.Student;
 
 public class ModulMapper {
@@ -227,6 +228,10 @@ public class ModulMapper {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public Vector<Modulbelegung> findModulbelegungByModul (Modul m) {
+		return ModulBelegungsMapper.modulbelegungsMapper().findByModul(m);
 	}
 	
 	
