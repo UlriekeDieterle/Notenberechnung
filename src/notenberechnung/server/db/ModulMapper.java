@@ -233,6 +233,38 @@ public class ModulMapper {
 	public Vector<Modulbelegung> findModulbelegungByModul (Modul m) {
 		return ModulBelegungsMapper.modulbelegungsMapper().findByModul(m);
 	}
+
+	public Vector<Modul> findModul(Modulbelegung b) {
+
+		return findByStudent(b.getBelegungsnr());
+	}
 	
+	private Vector<Modul> findByStudent(int id) {
+		Connection con = DBConnection.connection();
+		Vector<Modul> result = new Vector<Modul> ();
+		
+		try {
+			Statement smt = con.createStatement();
+			ResultSet rs = smt.executeQuery("SELECT EDV_Nummer, ECTS, Titel_des_Moduls, Modulverantwortlicher, Zeitpunkt_Leistungserbringung, Beschreibung"
+					+ " FROM modul " + "WHERE EDV_Nummer = " + id);
+			
+			while (rs.next()) {
+				Modul m = new Modul();
+				m.setId(rs.getInt("EDV_Nummer"));
+				m.setECTS(rs.getDouble("ECTS"));
+				m.setModulTitel(rs.getString("Titel_des_Moduls"));
+				m.setVerantwortlicher(rs.getString("Modulverantwortlicher"));
+				m.setZeitpunkt(rs.getString("Zeitpunkt_Leistungserbringung"));
+				m.setBeschreibung(rs.getString("Beschreibung"));
+				
+				result.addElement(m);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 }

@@ -4,7 +4,7 @@ public class Modul extends BusinessObject {
 
 	private static final long serialVersionUID = 1L;
 
-	private int ects = 0;
+	private double ects = 0;
 	private int id = 0;
 	private String titel = "";
 	private String verantwortl = "";
@@ -16,8 +16,8 @@ public class Modul extends BusinessObject {
 		this.id = id;
 	}
 
-	public void setECTS(int e) {
-		this.ects = e;
+	public void setECTS(double d) {
+		this.ects = d;
 	}
 
 	public void setModulTitel(String m) {

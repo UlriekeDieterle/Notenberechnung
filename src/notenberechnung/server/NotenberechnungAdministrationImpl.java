@@ -103,7 +103,7 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		
 		@Override
 		public void delete (Student student) throws IllegalArgumentException {
-			modulbelegungsMapper.getModulbelegungOfStudent(student);
+			studentMapper.getModulbelegungOfStudent(student);
 			studentMapper.delete(student);
 		}
 		
@@ -123,9 +123,17 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		}
 		
 		@Override
-		public Student getStudentByEmail(String email) throws IllegalArgumentException {
+		public Vector<Student> getStudentByEmail(String email) throws IllegalArgumentException {
 			return studentMapper.findByEmail(email);
 		}
+		
+		
+		@Override
+		public Vector<Student> getStudentByLastname(String lastname) throws IllegalArgumentException {
+			return studentMapper.findByNachname(lastname);
+		}
+		
+		
 		
 		//Modul
 		@Override
@@ -161,6 +169,16 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 			return modulMapper.findByKey(id);
 		}
 		
+		@Override
+		public Vector<Modul> getModulByECTS(int ects) throws IllegalArgumentException {
+			return modulMapper.findByECTS(ects);
+		}
+		
+		@Override
+		public Vector<Modul> getModulByZeitpunkt(String zeitp) throws IllegalArgumentException {
+			return modulMapper.findByZeitpunkt(zeitp);
+		}
+		
 		/*@Override
 		public Modul getModulBy () throws IllegalArgumentException {
 			return ;
@@ -184,6 +202,49 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 			
 		}
 		
+		@Override
+		public Vector<Modulbelegung> findAll() throws IllegalArgumentException {
+			return modulbelegungsMapper.findAll();
+		}
+		
+		@Override
+		public Vector<Modulbelegung> getBelegungById(int belegnr) throws IllegalArgumentException {
+			return modulbelegungsMapper.findByBelegung(belegnr);
+		}
+		
+		@Override
+		public Vector<Modulbelegung> getBelegungByStudent(Student s) throws IllegalArgumentException {
+			return modulbelegungsMapper.findByStudent(s);
+		}
+		
+		@Override
+		public Vector<Modulbelegung> getBelegungByModul (Modul m) throws IllegalArgumentException {
+			return modulbelegungsMapper.findByModul(m);
+		}
+		
+		@Override
+		public Double durchschnittBerechnen (Student s) throws IllegalArgumentException {
+			Double durchschnitt = 0.0;
+			/* Brauche: Student ID zur Identifikation (soll nur Noten für bestimmten Student berechnen)
+			 * von Modul: ECTS und Zeitpunkt Leistungserbringung
+			 * von Belegung: Note
+			 * 
+			 * Grund for(note * ects) 15%
+			 * Haupt for(note * ects) 70%
+			 * BA for(note * ects) 15%
+			 * 
+			 */
+			Double note;
+			for(int i = 0; i < 10; i++) {
+				//Vector<Modulbelegung> belegung = getBelegungByStudent(s);
+				//Vector<Modul> modul = get
+				
+			}
+			
+			
+			
+			return durchschnitt;
+		}
 		
 		
 		

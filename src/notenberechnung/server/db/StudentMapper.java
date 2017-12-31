@@ -118,7 +118,7 @@ public class StudentMapper {
 		return result;
 	}
 	
-	public Student findByEmail (String email) {
+	public Vector<Student> findByEmail (String email) {
 		Connection con = DBConnection.connection();
 		Vector<Student> result = new Vector<Student>();
 		
@@ -148,7 +148,7 @@ public class StudentMapper {
 				e.printStackTrace();
 		}
 		
-		return null;
+		return result;
 	}
 	
 	public Vector<Student> findByStudiengang (String studiengang) {
