@@ -242,7 +242,7 @@ public class ModulBelegungsMapper {
 		return result;
 	}
 	
-	public Vector<Modul> findModulByBelegung (Modulbelegung b) {
+	public Modul findModulByBelegung (Modulbelegung b) {
 		return ModulMapper.modulMapper().findModul(b);
 	}
 }

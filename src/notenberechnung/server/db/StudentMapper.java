@@ -1,8 +1,6 @@
 package notenberechnung.server.db;
 import java.sql.*;
 import java.util.Vector;
-
-import de.superteam2000.gwt.client.ClientsideSettings;
 import notenberechnung.shared.bo.Modulbelegung;
 // muss importiert werden, damit Typ Student aus Klasse BO bekannt ist, kann sonst nicht verwendet werden
 import notenberechnung.shared.bo.Student;
@@ -121,8 +119,7 @@ public class StudentMapper {
 	
 	public Student findByEmail (String email) {
 		Connection con = DBConnection.connection();
-		Vector<Student> result = new Vector<Student>();
-		
+				
 		try {
 			Statement smt = con.createStatement();
 			
@@ -139,7 +136,7 @@ public class StudentMapper {
 				s.setKuerzel(rs.getString("HdM_Kuerzel"));
 				s.setStudies(rs.getString("Studiengang"));
 				
-				result.addElement(s);
+				return s;
 				
 				//return result;
 			}
@@ -149,7 +146,7 @@ public class StudentMapper {
 				e.printStackTrace();
 		}
 		
-		return result;
+		return null;
 	}
 	
 	public Vector<Student> findByStudiengang (String studiengang) {

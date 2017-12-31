@@ -4,19 +4,7 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-
-import java.util.logging.Logger.*;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 import java.util.Vector;
-import java.util.concurrent.ThreadLocalRandom;
-
 import notenberechnung.server.db.ModulBelegungsMapper;
 import notenberechnung.server.db.ModulMapper;
 import notenberechnung.server.db.StudentMapper;
@@ -223,8 +211,12 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		}
 		
 		@Override
+		public Modul getModulByBelegung (Modulbelegung mb) throws IllegalArgumentException {
+			return modulMapper.findModul(mb);
+		}
+		
+		@Override
 		public Double durchschnittBerechnen (Student s) throws IllegalArgumentException {
-			Double durchschnitt = 0.0;
 			/* Brauche: Student ID zur Identifikation (soll nur Noten für bestimmten Student berechnen)
 			 * von Modul: ECTS und Zeitpunkt Leistungserbringung
 			 * von Belegung: Note
@@ -234,22 +226,33 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 			 * BA for(note * ects) 15%
 			 * 
 			 */
-			Double note = 0.0;
-			for(int i = 0; i < 10; i++) {
-				//Vector<Modulbelegung> belegung = getBelegungByStudent(s);
-				//Vector<Modul> modul = get
-				Vector<Modulbelegung> test = new Vector<Modulbelegung>();
-				test = getBelegungByStudent(s);
-				note = getNote(test);
-				
-			}
 			
-			
-			
+			Double durchschnitt = 0.0;
+			Vector<Modulbelegung> belegungen = getBelegungByStudent(s);
+			berechneDurschnittModule(belegungen);
+					
 			return durchschnitt;
 		}
 
-		
+		public Double berechneDurschnittModule(Vector<Modulbelegung> mb) {
+				Modul m = new Modul();
+				double durchschnitt = 0.0;
+				int gesamteECTS = 0;
+			for (int i = 0; i < mb.size(); i++) {
+				m = modulbelegungsMapper.findModulByBelegung(mb.elementAt(i));
+				//System.out.println(m);
+				
+				int ects = m.getECTS();
+				Modulbelegung b = mb.elementAt(i);
+				double note = b.getNote();
+				
+				durchschnitt += note*ects;
+				gesamteECTS += ects;
+			}
+			durchschnitt = durchschnitt/gesamteECTS;
+			
+			return durchschnitt;
+		}
 		
 		
 		

@@ -1,5 +1,6 @@
 package notenberechnung.server.db;
 
+import notenberechnung.server.NotenberechnungAdministrationImpl;
 import notenberechnung.shared.bo.Modul;
 import notenberechnung.shared.bo.Modulbelegung;
 import notenberechnung.shared.bo.Student;
@@ -34,7 +35,7 @@ public class Test {
 		
 		
 		
-		ModulMapper mm = new ModulMapper();
+		/*ModulMapper mm = new ModulMapper();
 		//System.out.println(mm.findByKey(12345));
 		Modul m = new Modul();
 		m.setId(1503);
@@ -56,6 +57,12 @@ public class Test {
 		System.out.println(mbm.insert(mb));
 		//System.out.println(mbm.getModulbelegungStudent(mb));
 		//System.out.println(mbm.getModulbelegungModul(mb));*/
+		
+		/*ModulMapper mbm = new ModulMapper();
+		Modulbelegung mb = new Modulbelegung();
+		mb.setBelegungsnr(3);
+		mb.setEDVNr(5001);
+		System.out.println(mbm.findModul(mb));*/
 		
 	}
 }
