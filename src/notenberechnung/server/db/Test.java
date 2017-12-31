@@ -34,27 +34,28 @@ public class Test {
 		
 		
 		
-		/*ModulMapper mm = new ModulMapper();
+		ModulMapper mm = new ModulMapper();
 		//System.out.println(mm.findByKey(12345));
 		Modul m = new Modul();
-		m.setId(12345);
-		/*m.setECTS(10);
-		m.setModulTitel("Big Data");
-		m.setVerantwortlicher("Hendrik Meth");
-		m.setZeitpunkt("Haupt");
-		m.setBeschreibung("Big Data");
-		mm.update(m);
-		System.out.println(mm.findModulbelegungByModul(m));*/
+		m.setId(1503);
+		m.setECTS(2);
+		m.setModulTitel("UG Geschäftsideen");
+		m.setVerantwortlicher("...");
+		m.setZeitpunkt("H");
+		m.setBeschreibung("");
+		System.out.println(mm.insert(m));
+		//System.out.println(mm.findModulbelegungByModul(m));*/
 		
 		/*ModulBelegungsMapper mbm = new ModulBelegungsMapper();
 		//System.out.println(bm.findByKey(1));
 		Modulbelegung mb = new Modulbelegung();
 		mb.setBelegungsnr(2);
-		mb.setNote(1.5);
+		mb.setNote(1.0);
 		mb.setMatrikelnummerFK(29489);
-		mb.setEDVNr(12345);
-System.out.println(mbm.getModulbelegungStudent(mb));
-System.out.println(mbm.getModulbelegungModul(mb));*/
+		mb.setEDVNr(7045);
+		System.out.println(mbm.insert(mb));
+		//System.out.println(mbm.getModulbelegungStudent(mb));
+		//System.out.println(mbm.getModulbelegungModul(mb));*/
 		
 	}
 }

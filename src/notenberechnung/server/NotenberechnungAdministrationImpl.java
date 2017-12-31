@@ -103,7 +103,7 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		
 		@Override
 		public void delete (Student student) throws IllegalArgumentException {
-			studentMapper.getModulbelegungOfStudent(student);
+			getBelegungByStudent(student);
 			studentMapper.delete(student);
 		}
 		
@@ -123,7 +123,7 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		}
 		
 		@Override
-		public Vector<Student> getStudentByEmail(String email) throws IllegalArgumentException {
+		public Student getStudentByEmail(String email) throws IllegalArgumentException {
 			return studentMapper.findByEmail(email);
 		}
 		
@@ -234,10 +234,13 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 			 * BA for(note * ects) 15%
 			 * 
 			 */
-			Double note;
+			Double note = 0.0;
 			for(int i = 0; i < 10; i++) {
 				//Vector<Modulbelegung> belegung = getBelegungByStudent(s);
 				//Vector<Modul> modul = get
+				Vector<Modulbelegung> test = new Vector<Modulbelegung>();
+				test = getBelegungByStudent(s);
+				note = getNote(test);
 				
 			}
 			
@@ -245,6 +248,8 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 			
 			return durchschnitt;
 		}
+
+		
 		
 		
 		

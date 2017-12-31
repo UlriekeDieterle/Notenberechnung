@@ -2,6 +2,7 @@ package notenberechnung.server.db;
 import java.sql.*;
 import java.util.Vector;
 
+import de.superteam2000.gwt.client.ClientsideSettings;
 import notenberechnung.shared.bo.Modulbelegung;
 // muss importiert werden, damit Typ Student aus Klasse BO bekannt ist, kann sonst nicht verwendet werden
 import notenberechnung.shared.bo.Student;
@@ -118,7 +119,7 @@ public class StudentMapper {
 		return result;
 	}
 	
-	public Vector<Student> findByEmail (String email) {
+	public Student findByEmail (String email) {
 		Connection con = DBConnection.connection();
 		Vector<Student> result = new Vector<Student>();
 		
@@ -188,12 +189,7 @@ public class StudentMapper {
 		
 		try{
 			Statement smt = con.createStatement();
-			
-			ResultSet rs = smt.executeQuery("SELECT MAX(Matrikelnummer) AS maxid FROM student");
-			if(rs.next()){
-				s.setId(rs.getInt("maxid") +1);
-				smt = con.createStatement();
-				
+								
 				// nur Strings mit '' einfügen, Rest ohne!
 				//System.out.println(test);
 				smt.executeUpdate("INSERT INTO student (Matrikelnummer, Vorname, Nachname, EMail, Geburtsdatum, HdM_Kuerzel, Studiengang) "
@@ -206,7 +202,7 @@ public class StudentMapper {
 						+ s.getKuerzel() + "', '" 
 						+ s.getStudies() + "')");
 				
-				}
+				notenberechnung.client.ClientsideSettings.getLogger().info("Profil " + s.getLastName() + "  in DB geschrieben");
 		}
 		catch (SQLException e) {
 		      e.printStackTrace();
@@ -250,5 +246,5 @@ public class StudentMapper {
 		return ModulBelegungsMapper.modulbelegungsMapper().findByStudent(s);
 	}
 
-		
+			
 }

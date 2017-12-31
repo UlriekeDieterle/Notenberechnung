@@ -21,7 +21,7 @@ public interface NotenberechnungAdministration {
 
 	Student getStudentByID(int id) throws IllegalArgumentException;
 
-	Vector<Student> getStudentByEmail(String email) throws IllegalArgumentException;
+	Student getStudentByEmail(String email) throws IllegalArgumentException;
 
 	Modul createModul(int id, int ects, String titel, String verantwortl, String zeitpunkt, String beschreibung)
 			throws IllegalArgumentException;

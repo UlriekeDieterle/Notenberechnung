@@ -5,7 +5,7 @@ import java.util.Vector;
 
 import notenberechnung.shared.bo.Modul;
 import notenberechnung.shared.bo.Modulbelegung;
-import notenberechnung.shared.bo.Student;
+
 
 public class ModulMapper {
 
@@ -31,13 +31,7 @@ public class ModulMapper {
 			ResultSet rs = smt.executeQuery("SELECT EDV_Nummer, ECTS, Titel_des_Moduls, Modulverantwortlicher, Zeitpunkt_Leistungserbringung, Beschreibung "
 					+ "FROM modul "+ "WHERE EDV_Nummer =" + id + " ORDER BY Titel_des_Moduls");
 			
-			/*stmt.executeUpdate("INSERT INTO profil (ProfilID, LastName, DriversLicense, Email, FirstName) " + "VALUES ("
-					+ p.getID() + ",'" 
-					+ p.getLastName() + "', " 
-					+ p.getDriversLicence() + ", '" 
-					+ p.getEmail() + "', '"
-					+ p.getFirstName() + "')");*/
-			
+						
 			if(rs.next()) {
 				Modul m = new Modul();
 				m.setId(rs.getInt("EDV_Nummer"));
@@ -177,11 +171,7 @@ public class ModulMapper {
 		
 		try{
 			Statement smt = con.createStatement();
-			ResultSet rs = smt.executeQuery("SELECT MAX(EDV_Nummer) AS maxid FROM modul");
-			if(rs.next()){
-				m.setId(rs.getInt("maxid") +1);
-				smt = con.createStatement();
-				smt.executeUpdate("INSERT INTO modul (EDV_Nummer, ECTS, Titel_des_Moduls, Modulverantwortlicher, Zeitpunkt_Leistungserbringung, Beschreibung)"
+			smt.executeUpdate("INSERT INTO modul (EDV_Nummer, ECTS, Titel_des_Moduls, Modulverantwortlicher, Zeitpunkt_Leistungserbringung, Beschreibung)"
 						+ " VALUES (" 
 						+ m.getId() + "," 
 						+ m.getECTS() + ",'" 
@@ -189,8 +179,6 @@ public class ModulMapper {
 						+ m.getVerantwortlicher() + "','" 
 						+ m.getZeitpunkt() + "','" 
 						+ m.getBeschreibung() + "')");
-			
-			}
 			
 		}
 		catch (SQLException e) {
@@ -251,7 +239,7 @@ public class ModulMapper {
 			while (rs.next()) {
 				Modul m = new Modul();
 				m.setId(rs.getInt("EDV_Nummer"));
-				m.setECTS(rs.getDouble("ECTS"));
+				m.setECTS(rs.getInt("ECTS"));
 				m.setModulTitel(rs.getString("Titel_des_Moduls"));
 				m.setVerantwortlicher(rs.getString("Modulverantwortlicher"));
 				m.setZeitpunkt(rs.getString("Zeitpunkt_Leistungserbringung"));
