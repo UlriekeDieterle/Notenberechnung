@@ -48,13 +48,13 @@ public interface NotenberechnungAdministration {
 
 	Vector<Modulbelegung> getBelegungById(int belegnr) throws IllegalArgumentException;
 
-	Vector<Modulbelegung> getBelegungByStudent(Student s) throws IllegalArgumentException;
-
 	Double durchschnittBerechnen(Student s) throws IllegalArgumentException;
 
 	Vector<Modulbelegung> getBelegungByModul(Modul m) throws IllegalArgumentException;
 
 	Modul getModulByBelegung(Modulbelegung mb) throws IllegalArgumentException;
+
+	Vector<Modulbelegung> getBelegungByStudent(Student s) throws IllegalArgumentException;
 
 	
 	
