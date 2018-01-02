@@ -91,7 +91,14 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		
 		@Override
 		public void delete (Student student) throws IllegalArgumentException {
-			getBelegungByStudent(student);
+						
+			Vector<Modulbelegung> belegungen = getBelegungByStudent(student);
+			
+			for (int i = 0; i < belegungen.size(); i++) {
+				modulbelegungsMapper.deleteModulbelegungOfStudent(belegungen.elementAt(i));
+				//System.out.println("Modulbelegung " + belegungen.elementAt(i) + " erfolgreich gelöscht.");
+			}
+			
 			studentMapper.delete(student);
 		}
 		
@@ -139,6 +146,14 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		
 		@Override
 		public void delete (Modul modul) throws IllegalArgumentException {
+			
+			Vector<Modulbelegung> belegungen = getBelegungByModul(modul);
+					
+			for (int i = 0; i < belegungen.size(); i++) {
+				modulbelegungsMapper.deleteModulbelegungOfModul(belegungen.elementAt(i));
+				//System.out.println("Modulbelegung " + belegungen.elementAt(i) + " wurde erfolgreich gelöscht.");
+			}
+						
 			modulMapper.delete(modul);
 		}
 		
@@ -218,22 +233,11 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		
 		@Override
 		public Double durchschnittBerechnen (Student s) throws IllegalArgumentException {
-			/* Brauche: Student ID zur Identifikation (soll nur Noten für bestimmten Student berechnen)
-			 * von Modul: ECTS und Zeitpunkt Leistungserbringung
-			 * von Belegung: Note
-			 * 
-			 * Grund for(note * ects) 15%
-			 * Haupt for(note * ects) 70%
-			 * BA for(note * ects) 15%
-			 * 
-			 */
-
+			
 			Double durchschnitt = 0.0;
 			Vector<Modulbelegung> belegungen = getBelegungByStudent(s);
 			durchschnitt = berechneDurschnittModule(belegungen);
-			
-			
-					
+								
 			return durchschnitt;
 		}
 
@@ -317,10 +321,25 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		}
 	
 		@Override
-		public int fehlendeECTSberechnen (Student s) throws IllegalArgumentException {
+		public String fehlendeECTSberechnen (Student s) throws IllegalArgumentException {
+			String status = "";
 			int mindECTSAbschluss = 210;
-			return mindECTSAbschluss - erreichteECTSausgeben(s);
+			int erreichteECTS = erreichteECTSausgeben(s);
+			int fehlendeECTS = mindECTSAbschluss - erreichteECTS;
+			
+			if (erreichteECTS < 210) {
+				status = ("Sie haben bereits " + erreichteECTS + " ECTS erreicht. Ihnen fehlen noch " + fehlendeECTS + " ECTS für den Abschluss.");
+			} else if (erreichteECTS >= 210 || erreichteECTS <= 220) {
+				status = ("Sie haben bereits " + erreichteECTS + " ECTS erreicht. Gut gemacht!");
+			} else if (erreichteECTS > 220) {
+				status = ("Sie haben mehr als 220 ECTS erreicht, es besteht Handlungsbedarf!");
+			} else {
+				status = ("Fehler in der Berechnung der ECTS; konnte keinen Status zu Ihren ECTS bestimmen.");
+			}
+			
+			return status;
 		}
+		
 		
 	}
 	

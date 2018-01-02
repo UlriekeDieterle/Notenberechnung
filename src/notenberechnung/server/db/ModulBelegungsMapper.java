@@ -161,12 +161,21 @@ public class ModulBelegungsMapper {
 		}
 	}
 	
-	public void deleteOfModulbelegung (Modulbelegung b) {
+	public void deleteModulbelegungOfStudent (Modulbelegung b) {
 		Connection con = DBConnection.connection();
 		
 		try {
 			Statement smt = con.createStatement();
 			smt.executeUpdate("DELETE FROM modulbelegung" + " WHERE MatrikelnummerFK = " + b.getMatrikelnrFK());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteModulbelegungOfModul (Modulbelegung b) {
+		Connection con = DBConnection.connection();
+		try {
+			Statement smt = con.createStatement();
 			smt.executeUpdate("DELETE FROM modulbelegung" + " WHERE EDVNummerFK = " + b.getEDVNrFK());
 		} catch (SQLException e) {
 			e.printStackTrace();

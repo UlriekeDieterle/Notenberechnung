@@ -58,7 +58,7 @@ public interface NotenberechnungAdministration {
 
 	int erreichteECTSausgeben(Student s) throws IllegalArgumentException;
 
-	int fehlendeECTSberechnen(Student s) throws IllegalArgumentException;
+	String fehlendeECTSberechnen(Student s) throws IllegalArgumentException;
 
 	
 	
