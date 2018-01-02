@@ -201,7 +201,8 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 		}
 		
 		@Override
-		public Vector<Modulbelegung> getBelegungByStudent(Student s) throws IllegalArgumentException {
+		public Vector<Modulbelegung> getBelegungByStudent(Student s) throws IllegalArgumentException 
+		{
 			return studentMapper.getModulbelegungOfStudent(s);
 		}
 		
@@ -226,7 +227,7 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 			 * BA for(note * ects) 15%
 			 * 
 			 */
-			
+
 			Double durchschnitt = 0.0;
 			Vector<Modulbelegung> belegungen = getBelegungByStudent(s);
 			durchschnitt = berechneDurschnittModule(belegungen);
@@ -240,7 +241,7 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 				Modul m = new Modul();
 				double durchschnitt = 0.0;
 				int gesamteECTS = 0;
-			for (int i = 0; i <= mb.size(); i++) {
+			for (int i = 0; i < mb.size(); i++) {
 				m = modulbelegungsMapper.findModulByBelegung(mb.elementAt(i));
 				//System.out.println(m);
 				
@@ -248,10 +249,15 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 				Modulbelegung b = mb.elementAt(i);
 				double note = b.getNote();
 				
+				if(note != 0.0) {
 				durchschnitt += note*ects;
 				gesamteECTS += ects;
+				} else {
+					System.out.println(m);
+				}
 			}
-			durchschnitt = durchschnitt/gesamteECTS;
+			durchschnitt = Math.round(1000.0*(durchschnitt/gesamteECTS))/1000.0;
+			
 			
 			return durchschnitt;
 		}

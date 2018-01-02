@@ -10,7 +10,8 @@ public class TestImpl {
 		NotenberechnungAdministrationImpl neu = new NotenberechnungAdministrationImpl();
 	Student s = new Student();
 		s.setId(29489);
-		neu.durchschnittBerechnen(s);
+		neu.init();
+		System.out.println(neu.durchschnittBerechnen(s));
 	}
 
 }
