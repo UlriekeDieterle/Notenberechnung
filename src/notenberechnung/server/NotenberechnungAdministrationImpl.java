@@ -237,10 +237,16 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 			return durchschnitt;
 		}
 
-		public Double berechneDurschnittModule(Vector<Modulbelegung> mb) {
+		private Double berechneDurschnittModule(Vector<Modulbelegung> mb) {
 				Modul m = new Modul();
-				double durchschnitt = 0.0;
-				int gesamteECTS = 0;
+				double gesamterDurchschnitt = 0.0;
+				double durchschnittGrund = 0.0;
+				double durchschnittHaupt = 0.0;
+				double durchschnittBA = 0.0;
+				int gesamteECTSGrund = 0;
+				int gesamteECTSHaupt = 0;
+				int gesamteECTSBA = 18;
+				
 			for (int i = 0; i < mb.size(); i++) {
 				m = modulbelegungsMapper.findModulByBelegung(mb.elementAt(i));
 				//System.out.println(m);
@@ -248,24 +254,73 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 				int ects = m.getECTS();
 				Modulbelegung b = mb.elementAt(i);
 				double note = b.getNote();
+				String zeitpunkt = m.getZeitpunkt();
 				
-				if(note != 0.0) {
-				durchschnitt += note*ects;
-				gesamteECTS += ects;
-				} else {
-					System.out.println(m);
+				switch (zeitpunkt) {
+				case "G": 
+					if(note != 0.0) {
+						durchschnittGrund += note*ects;
+						gesamteECTSGrund += ects;
+						} else {
+							System.out.println(m);
+						}
+					break;
+					
+				case "H":
+					if(note != 0.0) {
+						durchschnittHaupt += note*ects;
+						gesamteECTSHaupt += ects;
+						} else {
+							System.out.println(m);
+						}
+					break;
+					
+				case "BA":
+					if(note != 0.0) {
+						durchschnittBA += note*ects;
+						gesamteECTSBA += ects;
+						} else {
+							System.out.println(m);
+						}
+					break;
+					
 				}
+				
 			}
-			durchschnitt = Math.round(1000.0*(durchschnitt/gesamteECTS))/1000.0;
 			
+			gesamterDurchschnitt = Math.round(1000.0 * (((durchschnittGrund/gesamteECTSGrund)*0.15)+((durchschnittHaupt/gesamteECTSHaupt)*0.7)
+					+((durchschnittBA/gesamteECTSBA)*0.15))) / 1000.0;			
 			
-			return durchschnitt;
+			return gesamterDurchschnitt;
 		}
 		
-		
-		
-		
+		@Override
+		public int erreichteECTSausgeben(Student s) throws IllegalArgumentException {
+			
+			int gesamteECTS = 0;
+			Vector<Modulbelegung> belegungen = getBelegungByStudent(s);
+			gesamteECTS = berechneErreichteECTS(belegungen);
+			
+			return gesamteECTS;
+		}
+
+		private int berechneErreichteECTS(Vector<Modulbelegung> mb) {
+			int gesamteECTS = 0;
+			Modul m = new Modul();
+			
+			for (int i = 0; i < mb.size(); i++) {
+				m = modulbelegungsMapper.findModulByBelegung(mb.elementAt(i));
+				gesamteECTS += m.getECTS();
+			}
+						
+			return gesamteECTS;
+		}
 	
+		@Override
+		public int fehlendeECTSberechnen (Student s) throws IllegalArgumentException {
+			int mindECTSAbschluss = 210;
+			return mindECTSAbschluss - erreichteECTSausgeben(s);
+		}
 		
 	}
 	

@@ -12,6 +12,8 @@ public class TestImpl {
 		s.setId(29489);
 		neu.init();
 		System.out.println(neu.durchschnittBerechnen(s));
+		System.out.println(neu.erreichteECTSausgeben(s));
+		System.out.println("Ihnen fehlen noch mindestens " + neu.fehlendeECTSberechnen(s) + " ECTS um den Abschluss zu bestehen.");
 	}
 
 }

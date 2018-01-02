@@ -56,6 +56,10 @@ public interface NotenberechnungAdministration {
 
 	Vector<Modulbelegung> getBelegungByStudent(Student s) throws IllegalArgumentException;
 
+	int erreichteECTSausgeben(Student s) throws IllegalArgumentException;
+
+	int fehlendeECTSberechnen(Student s) throws IllegalArgumentException;
+
 	
 	
 
