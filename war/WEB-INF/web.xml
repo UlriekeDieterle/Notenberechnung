@@ -3,10 +3,11 @@
 	version="2.5"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee                http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<!-- Servlets -->
+    
+	Servlets
 	<servlet>
 		<servlet-name>bankVerwaltungServlet</servlet-name>
-		<servlet-class>de.hdm.thies.bankProjekt.server.BankAdministrationImpl</servlet-class>
+		<servlet-class>notenberechnung.server.NotenberechnungAdministrationImpl</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -15,7 +16,7 @@
 		<url-pattern>/bankprojektcommands/bankadministration</url-pattern>
 		<url-pattern>/bankprojektreports/bankadministration</url-pattern>
 	</servlet-mapping>
-
+<!-- 
 	<servlet>
 		<servlet-name>reportGeneratorServlet</servlet-name>
 		<servlet-class>de.hdm.thies.bankProjekt.server.report.ReportGeneratorImpl</servlet-class>
@@ -27,12 +28,11 @@
 		<url-pattern>/bankprojektcommands/reportgenerator</url-pattern>
 		<url-pattern>/bankprojektreports/reportgenerator</url-pattern>
 	</servlet-mapping>
-
-	<!-- Default page to serve -->
+-->
+	Default page to serve
 	<welcome-file-list>
-		<welcome-file>BankProjekt.html</welcome-file>
-		<welcome-file>BankProjektReports.html</welcome-file>
-		<welcome-file>BankProjektCommands.html</welcome-file>
+		<welcome-file>VehicleRental.html</welcome-file>
+
 	</welcome-file-list>
 
 

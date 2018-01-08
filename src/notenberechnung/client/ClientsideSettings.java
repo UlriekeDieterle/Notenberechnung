@@ -26,20 +26,10 @@ public class ClientsideSettings extends CommonSettings{
 	 
 	 public static NotenberechnungAdministrationAsync getNotenberechnungVerwaltung() {
 		  
-		  /*
-		   * Wenn es bisher noch keine partnerboerseVerwaltungs-Instanz gab, wird hiermit nun
-		   * eine erzeugt.
-		   */
 	    if (notenVerwaltung == null) {
-	      	/*
-	    	 * In diesem Schritt wird die PartnerboerseAdministration instantiiert.
-	    	 */
 	      notenVerwaltung = GWT.create(NotenberechnungAdministration.class);
 	    }
 
-	    /*
-	     * Die PartnerboerseVerwaltung wird zurückgegeben.
-	     */
 	    return notenVerwaltung;
 	  }
 	 
