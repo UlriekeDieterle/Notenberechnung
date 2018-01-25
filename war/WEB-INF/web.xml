@@ -6,12 +6,12 @@
     
 	Servlets
 	<servlet>
-		<servlet-name>bankVerwaltungServlet</servlet-name>
+		<servlet-name>NotenberechnungServlet</servlet-name>
 		<servlet-class>notenberechnung.server.NotenberechnungAdministrationImpl</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>bankVerwaltungServlet</servlet-name>
+		<servlet-name>NotenberechnungServlet</servlet-name>
 		<url-pattern>/bankprojekt_2_0/bankadministration</url-pattern>
 		<url-pattern>/bankprojektcommands/bankadministration</url-pattern>
 		<url-pattern>/bankprojektreports/bankadministration</url-pattern>
@@ -29,9 +29,10 @@
 		<url-pattern>/bankprojektreports/reportgenerator</url-pattern>
 	</servlet-mapping>
 -->
+
 	Default page to serve
 	<welcome-file-list>
-		<welcome-file>VehicleRental.html</welcome-file>
+		<welcome-file>Notenberechnung.html</welcome-file>
 
 	</welcome-file-list>
 

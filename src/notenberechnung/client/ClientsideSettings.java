@@ -36,7 +36,8 @@ public class ClientsideSettings extends CommonSettings{
 	 public static Student getCurrentUser() {
 		    return currentUser;
 		  }
-
+	
+	// @Override
 	public static void setCurrentUser(Student currentUser) {
 		ClientsideSettings.currentUser = currentUser;		
 	}

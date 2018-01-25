@@ -1,10 +1,12 @@
 package notenberechnung.shared.bo;
 
+import java.util.Date;
+
 public class Student extends BusinessObject {
 
 	private static final long serialVersionUID = 1L;
 	private int id = 0;
-	private int birthday = 0;
+	private Date birthday;
 	private String firstName = "";
 	private String lastName = "";
 	private String email = "";
@@ -58,7 +60,7 @@ public class Student extends BusinessObject {
 		return this.lastName;
 	}
 
-	public int getBirthday() {
+	public Date getBirthday() {
 		return this.birthday;
 	}
 
@@ -90,6 +92,22 @@ public class Student extends BusinessObject {
 	public void setLoginUrl(String loginURL) {
 		this.loginUrl = loginURL;		
 	}
+
+	public String getLogoutUrl() {
+		return logoutUrl;
+	}
+	
+	@Override
+	public boolean equals (Object o) {
+		if (o != null && o instanceof Student) {
+			Student s = (Student) o;
+			try {
+				return super.equals(s);
+			} catch (IllegalArgumentException e) {
+				return false;
+			}
+		} return false;
+	} 
 	
 
 }

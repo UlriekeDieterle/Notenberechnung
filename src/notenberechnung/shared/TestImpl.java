@@ -10,15 +10,17 @@ public class TestImpl {
 
 		NotenberechnungAdministrationImpl neu = new NotenberechnungAdministrationImpl();
 	//Student s = new Student();
-	Modul m = new Modul();
-		//s.setId(29490);
-		m.setId(12345);
+	Student s = new Student();
+		s.setId(29487);
+		//m.setId(12345);
 		neu.init();
 		//System.out.println(neu.durchschnittBerechnen(s));
 		//System.out.println(neu.erreichteECTSausgeben(s));
 		//System.out.println(neu.fehlendeECTSberechnen(s));
 		
-		neu.delete(m);
+		System.out.println(neu.durchschnittBerechnen(s));
+		System.out.println(neu.erreichteECTSausgeben(s));
+		System.out.println(neu.fehlendeECTSberechnen(s));
 		//neu.delete(s);
 	}
 

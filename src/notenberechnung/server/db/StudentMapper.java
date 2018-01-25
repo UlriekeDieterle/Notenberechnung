@@ -242,6 +242,5 @@ public class StudentMapper {
 	public Vector<Modulbelegung> getModulbelegungOfStudent (Student s) {
 		return ModulBelegungsMapper.modulbelegungsMapper().findByStudent(s);
 	}
-
 			
 }
