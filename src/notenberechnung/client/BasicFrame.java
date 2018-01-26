@@ -14,7 +14,7 @@ public abstract class BasicFrame extends VerticalPanel {
 	NotenberechnungAdministrationAsync notenVerwaltung = ClientsideSettings.getNotenberechnungVerwaltung();
 	Student student = ClientsideSettings.getCurrentUser();
 	
-	/*@Override
+	@Override
 	public void onLoad() {
 		super.onLoad();
 		this.add(this.createHeadline(this.getHeadlineText()));
@@ -40,9 +40,9 @@ public abstract class BasicFrame extends VerticalPanel {
 	public String getSubHeadlineText() {
 		// TODO Auto-generated method stub
 		return null;
-	}*/
+	}
 
-	public void load() {
+	/*public void load() {
 		
 		MenuBar menu = new MenuBar();
 		menu.setAutoOpen(true);
@@ -128,7 +128,7 @@ public abstract class BasicFrame extends VerticalPanel {
 	protected void loadLogout(Student student2) {
 		final String logoutURL = student.getLogoutUrl();
 		Window.Location.assign(logoutURL);		
-	}
+	}*/
 	
 	
 }

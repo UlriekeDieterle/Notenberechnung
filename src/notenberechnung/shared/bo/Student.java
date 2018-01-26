@@ -2,6 +2,8 @@ package notenberechnung.shared.bo;
 
 import java.util.Date;
 
+import com.google.gwt.safehtml.shared.SafeUri;
+
 public class Student extends BusinessObject {
 
 	private static final long serialVersionUID = 1L;
@@ -16,6 +18,7 @@ public class Student extends BusinessObject {
 	private boolean loggedIn = false;
 	private String loginUrl = "";
 	private String logoutUrl = "";
+	private boolean isCreated = false;
 
 	public void setId(int id1) {
 		this.id = id1;
@@ -35,7 +38,7 @@ public class Student extends BusinessObject {
 		this.email = e;
 	}
 
-	public void setBirthday(int birthd) {
+	public void setBirthday(Date birthd) {
 		this.birthday = birthd;
 	}
 
@@ -92,6 +95,10 @@ public class Student extends BusinessObject {
 	public void setLoginUrl(String loginURL) {
 		this.loginUrl = loginURL;		
 	}
+	
+	public String getLoginUrl() {
+		return loginUrl;
+	}
 
 	public String getLogoutUrl() {
 		return logoutUrl;
@@ -107,7 +114,16 @@ public class Student extends BusinessObject {
 				return false;
 			}
 		} return false;
-	} 
+	}
+
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+
+	public boolean isCreated() {
+		return isCreated;
+	}
+
 	
 
 }

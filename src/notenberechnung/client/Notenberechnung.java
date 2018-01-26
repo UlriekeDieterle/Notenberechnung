@@ -5,7 +5,8 @@ import com.google.gwt.dom.client.ParagraphElement;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 
-import notenberechnung.server.db.StudentMapper;
+import notenberechnung.shared.NotenberechnungAdministrationAsync;
+import notenberechnung.shared.bo.Student;
 
 
 	/**
@@ -14,6 +15,9 @@ import notenberechnung.server.db.StudentMapper;
 	 */
 public class Notenberechnung implements EntryPoint {
 
+	
+	NotenberechnungAdministrationAsync notenVerwaltung = ClientsideSettings.getNotenberechnungVerwaltung();
+	
 	/**
 	 * 
 	   * Da diese Klasse die Implementierung des Interface <code>EntryPoint</code>
@@ -23,42 +27,53 @@ public class Notenberechnung implements EntryPoint {
 	   
 	 */
 	public void onModuleLoad() { 
-		createLoginScreen();
+		notenVerwaltung.login(GWT.getHostPageBaseURL() + "Notenberechnung.html", new LoginCallback());
+		
+		//createLoginScreen();
 	 } 
 	
-	 private void createLoginScreen() {
-	      
-	      //CSS Stylename für die entsprechenden Divs setzen und mit Texten füllen
-	      FlowPanel splashContainer = new FlowPanel();
+	class LoginCallback implements AsyncCallback<Student> {
+		@Override
+	    public void onFailure(Throwable caught) {
+	      ClientsideSettings.getLogger().severe("Login fehlgeschlagen!");
+	    }
+		
+		@Override
+		public void onSuccess(Student result) {
+			ClientsideSettings.getCurrentUser();
+			if (result.isLoggedIn() && !result.isCreated()) {
+		        ClientsideSettings.getLogger().info("Erstelle Profil für " + result.getEmail());
+		        profilErstellen();
+		}else if (result.isLoggedIn()) {
+	        ClientsideSettings.getLogger().info("Lade vorhandenes Profil");
+	        loadProfil();
+
+	      } else {
+	        createLoginScreen(result);
+	      }
+			
+		}	
+	}
+	
+	public void createLoginScreen(Student result) {
+		 FlowPanel splashContainer = new FlowPanel();
 	      splashContainer.setStyleName("splash-container");
 	      
 	      FlowPanel splash = new FlowPanel();
 	      splash.setStyleName("splash");
-
+	      
 	      HTML headingElement = new HTML();
-	      headingElement.setHTML("Wenn Sie diese Anwendung nutzen möchten, legen Sie bitte ein Profil an!");
+	      headingElement.setHTML("Willkommen bei der Notenberechnung");
 	      headingElement.setStyleName("splash-head");
 
 	      FlowPanel splashSubhead = new FlowPanel(ParagraphElement.TAG);
 	      splashSubhead.setStyleName("splash-subhead");
-	      HTML splahParagraph = new HTML("Melden Sie sich hier an:");
-	      splashSubhead.add(splahParagraph);
+	     // HTML splahParagraph = new HTML("Melde dich an und finde deine bessere Hälfte");
+	     // splashSubhead.add(splahParagraph);
 
-	      Anchor loginAnchor = new Anchor("Anmeldung");
+	      Anchor loginAnchor = new Anchor("Los!");
 	      loginAnchor.setStyleName("pure-button-login pure-button-primary-login");
-
-	      FlexTable ft = new FlexTable();
-	      ft.setText(0, 0, "upper-left corner");
-	      ft.setText(2, 2, "bottom-right corner");
-
-	      // Let's put a button in the middle...
-	      ft.setWidget(1, 0, new Button("Wide Button"));
-	      ft.setWidget (0, 1, new Button ("testtest"));
-
-	      // ...and set it's column span so that it takes up the whole row.
-	      ft.getFlexCellFormatter().setColSpan(1, 0, 3);
-
-	      RootPanel.get().add(ft);
+	      loginAnchor.setHref(result.getLoginUrl());
 
 	      //Divs und Anchor zum Div hinzufügen
 	      splash.add(headingElement);
@@ -66,7 +81,21 @@ public class Notenberechnung implements EntryPoint {
 	      splash.add(loginAnchor);
 	      
 	      splashContainer.add(splash);
-	       
+	      RootPanel.get("main").add(splashContainer);
+	}
+	
+	private void profilErstellen() {
+	      BasicFrame cf = new CreateStudentAccount();
+	      RootPanel.get("main").clear();
+	      RootPanel.get("main").add(cf);
 	    }
+	
+	private void loadProfil() {
+	      Navbar nb = new Navbar();
+	      RootPanel.get("menu").clear();
+	      RootPanel.get("menu").add(nb);
 
+	      ShowStudent sp = new ShowStudent();
+	      RootPanel.get("main").add(sp);
+	    }
 }

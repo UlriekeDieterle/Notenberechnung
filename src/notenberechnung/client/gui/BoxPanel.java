@@ -1,19 +1,22 @@
 package notenberechnung.client.gui;
 
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 
-import de.superteam2000.gwt.client.gui.EigenschaftListBox;
+import notenberechnung.shared.bo.Student;
 
 
 
 public class BoxPanel extends FlowPanel{
 
-	 ProfilAttributTextBox profilAttributTextBox = new ProfilAttributTextBox();
-	 EigenschaftListBox profilAttributListBox = new EigenschaftListBox();
-	// public BoxPanel (Auswahl a) {
-		// auswahl = a;
-		  //  profilAttributListBox = new EigenschaftListBox(a);
-
+	Student student = null;
+	
+	
+	 ProfilAttribute profilAttributTextBox = new ProfilAttribute(null);
+	 public BoxPanel (String text) {
+		 this.add(new HTML(text));
 	 }
 	
+	 
+	 
 }

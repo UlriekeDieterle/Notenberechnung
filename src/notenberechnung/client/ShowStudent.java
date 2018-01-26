@@ -70,14 +70,13 @@ public class ShowStudent extends BasicFrame{
 	}*/
 	
 	
-	public ProfilAnzeigen() {
+	public ShowStudent() {
 		this.add(verticalpanel);
-		run();
+		load();
 	}
 	
 		
-	@Override
-	public void run(){
+	public void load(){
 		editProfileTable.setText(0, 0, "Matrikelnummer: ");
 		editProfileTable.setText(1, 0, "Vorname: ");
 		editProfileTable.setText(2, 0, "Nachname: ");
@@ -200,12 +199,28 @@ public class ShowStudent extends BasicFrame{
 				geburtsdatum.setValue(geburtsdatum);
 				
 				geburtstagLabel.setText(geburtsdatumString);
-				
-				
+				matrikelnummer.setText(String.valueOf(result.getId()));
+				studiengang.setText(result.getStudies());
+				kuerzel.setText(result.getKuerzel());
+				email.setText(result.getEmail());
 			}
 		});
+		
+		
 	}
 	
+	public void aktualisiereProfil() {
+			notenVerwaltung.bearbeiteProfil(student.getId(), vorname.getText(), nachname.getText(), getGeburtsdatum(),
+					studiengang.getText(), kuerzel.getText(), email.getText());
+		}
+	
+	Date getGeburtsdatum() {
+		Date geburtsdatum = geburtsdatumFormat.parse(geburtstagLabel.getText());
+		java.sql.Date sqlDate = new java.sql.Date(geburtsdatum.getTime());
+		return sqlDate;
+	}
+	
+		
 	/*class GetAlleProfileAttributeCallback implements AsyncCallback<Vector<Student>> {
 		private BasicFrame basicframe = null;
 		private Student student = null;
@@ -245,7 +260,7 @@ public class ShowStudent extends BasicFrame{
 		}
 		
 		
-	}*/
+	}
 	
 	private class EditButtonClickhandler implements ClickHandler {
 		
@@ -273,7 +288,7 @@ public class ShowStudent extends BasicFrame{
 			
 		}
 		
-	}
+	}*/
 	
 	private static Date today() {
 		return zeroTime(new Date());
