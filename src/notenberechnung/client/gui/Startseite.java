@@ -24,8 +24,8 @@ public class Startseite extends HorizontalPanel {
 		this.add(horizontalpanel);
 		horizontalpanel.add(verticalpanel);
 		
-		BasicFrame navbar = new BasicFrame();
-		navbar.load();
+		//BasicFrame navbar = new BasicFrame();
+		//navbar.run();
 		
 		startseiteFlexTable.setText(0, 0, "Matrikelnummer: ");
 		startseiteFlexTable.setText(1, 0, "Vorname: ");
@@ -38,7 +38,7 @@ public class Startseite extends HorizontalPanel {
 		startseiteFlexTable.setStyleName("flextable");
 		zeigeProfilAn.setStyleName("flextable");
 		
-		ClientsideSettings.getNotenberechnungVerwaltung().getStudentById(student.getId(), new AsyncCallback<Student>(){
+		ClientsideSettings.getNotenberechnungVerwaltung().getStudentByID(student.getId(), new AsyncCallback<Student>(){
 			
 			@Override
 			public void onFailure (Throwable caught) {

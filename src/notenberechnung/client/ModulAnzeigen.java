@@ -98,6 +98,17 @@ public class ModulAnzeigen extends BasicFrame {
 		});
 		
 	}
+
+	@Override
+	protected String getHeadlineText() {
+		return "Hier kannst du die Module verwalten";
+	}
+
+	@Override
+	protected void run() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

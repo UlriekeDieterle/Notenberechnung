@@ -9,7 +9,7 @@ import notenberechnung.client.gui.Startseite;
 import notenberechnung.shared.NotenberechnungAdministrationAsync;
 import notenberechnung.shared.bo.*;
 
-public abstract class BasicFrame extends VerticalPanel {
+public abstract class BasicFrame extends FlowPanel {
 
 	NotenberechnungAdministrationAsync notenVerwaltung = ClientsideSettings.getNotenberechnungVerwaltung();
 	Student student = ClientsideSettings.getCurrentUser();
@@ -17,15 +17,17 @@ public abstract class BasicFrame extends VerticalPanel {
 	@Override
 	public void onLoad() {
 		super.onLoad();
-		this.add(this.createHeadline(this.getHeadlineText()));
-		this.run();
+		this.add(createHeadline(getHeadlineText()));
+		RootPanel.get("search-table").clear();
+		run();
 	}
 	
-	protected HTML createHeadline(String text) {
-		HTML content = new HTML(text);
-		content.setStylePrimaryName("notenberechnung-headline");
-		return content;
-	}
+	 protected HTML createHeadline(String header) {
+		    HTML content = new HTML();
+		    content.setStylePrimaryName("header");
+		    content.setHTML("<h1>" + header + "</h1>");
+		    return content;
+		  }
 	
 	protected void append (String text) {
 		HTML content = new HTML (text);
@@ -37,10 +39,7 @@ public abstract class BasicFrame extends VerticalPanel {
 	
 	protected abstract void run();
 
-	public String getSubHeadlineText() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	//public abstract String getSubHeadlineText();
 
 	/*public void load() {
 		

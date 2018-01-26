@@ -1,12 +1,6 @@
 package notenberechnung.shared;
-
-import notenberechnung.shared.bo.Student;
-
+//Muss leer sein, ist Superklasse von ClientsideSettings und ServersideSettings
 public class CommonSettings {
 
-	public static void setCurrentUser(Student currentUser) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

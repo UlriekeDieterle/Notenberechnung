@@ -71,7 +71,7 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 	
 	//Student
 		@Override
-		public Student createStudent (int id, String vorname, String nachname, String email, int gebdatum, 
+		public Student createStudent (int id, String vorname, String nachname, String email, 
 				String kuerzel, String studiengang) throws IllegalArgumentException {
 			
 			Student s = new Student();
@@ -79,7 +79,6 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 			s.setFirstName(vorname);
 			s.setLastName(nachname);
 			s.setEmail(email);
-			s.setBirthday(gebdatum);
 			s.setKuerzel(kuerzel);
 			s.setStudies(studiengang);
 			
@@ -339,8 +338,8 @@ public class NotenberechnungAdministrationImpl extends RemoteServiceServlet impl
 			
 			return status;
 		}
-		
-		
-	}
+
+
+}
 	
 

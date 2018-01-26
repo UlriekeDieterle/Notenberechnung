@@ -1,23 +1,15 @@
 package notenberechnung.client;
 
-import java.util.ArrayList;
-import java.util.Vector;
 import java.util.logging.Logger;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 
-import notenberechnung.client.gui.GeburtstagsListbox;
-import notenberechnung.client.gui.ProfilAttribute;
 import notenberechnung.shared.NotenberechnungAdministrationAsync;
 import notenberechnung.shared.bo.Student;
+import notenberechnung.client.BasicFrame;
 
 public class CreateStudentAccount extends BasicFrame {
 
@@ -39,57 +31,29 @@ public class CreateStudentAccount extends BasicFrame {
 	TextBox emailTB = new TextBox();
 	TextBox studiengangTB = new TextBox();
 	
-	@Override
+	/*@Override
 	protected String getHeadlineText() {
 		return "Studentenkonto anlegen";
-	}
-
-	/*@Override
-	protected String getSubHeadlineText() {
-		return ("Fülle die Felder aus und lege dein Konto gleich an!");
 	}*/
 	
+	
 	// Hier fehlt noch was... getCurrentUser ist leer, hier sollte ein Studenten-Objekt übergeben werden0
-	@Override
+	
 	protected void run() {
 		contentpanel.setStyleName("content");
 		alignpanel.setStyleName("pure-form pure-form-aligned");
-		
-		/*gebTag = new GeburtstagsListbox();
-	    gebTag.createGebtagListbox("Was ist dein Geburtstag?");
-	    gebTag.setEnable(true);*/
-		
+			
 	    confirmBtn = new Button("Weiter");
 		confirmBtn.setStyleName("pure-button pure-button-primary");
 				
 		confirmBtn.addClickHandler(new ConfirmClickHandler());
-		
-		 //notenVerwaltung.getProfilFormular(new GetProfilFormularCallBack());
-		
+				
 		contentpanel.add(alignpanel);
 		
 		RootPanel.get("main").add(contentpanel);
 	}
 	
-	/* private class GetProfilFormularCallBack implements AsyncCallback<Vector<Student>> {
-		 FlexTable flexTable = new FlexTable();
-		    @Override
-		    public void onSuccess(Vector<Student> result) {
-		     // for (Student s : result) {
-		        flexTable = ProfilAttribute.createProfilFormular();
-		        alignpanel.add(flexTable);
-		     // }
-
-		    //  alignpanel.add(gebTag);
-		      alignpanel.add(confirmBtn);
-		    }
-
-		    /**
-		     * Um Fehler abzufangen.
-		     
-		    @Override
-		    public void onFailure(Throwable caught) {}
-		  }*/
+	
 	
 	 private class ConfirmClickHandler implements ClickHandler {
 
@@ -140,7 +104,7 @@ public class CreateStudentAccount extends BasicFrame {
 		if(!firstName.isEmpty() && !lastName.isEmpty()) {
 			//pbVerwaltung.createProfil(lastName, firstName, email, gebTagSql, haarfarbe, raucher, religion,
 //	          groesse, geschlecht, new CreateCustomerCallback());
-			notenVerwaltung.createProfile(matrikelnummer, firstName, lastName, email, kuerzel, studiengang, new CreateStudentCallback());
+		//	notenVerwaltung.createStudent(matrikelnummer, firstName, lastName, email, kuerzel, studiengang, new CreateStudentCallback());
 		} else { System.out.println("Bitte füllen Sie alle wichtigen Felder aus.");}
 		
 		
@@ -164,6 +128,12 @@ public class CreateStudentAccount extends BasicFrame {
 				 }
 			 }*/
 		 }
+
+	@Override
+	protected String getHeadlineText() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	/*FlexTable profilAttribute = new FlexTable();
 	profilAttribute.setText(0, 0, "Matrikelnummer");

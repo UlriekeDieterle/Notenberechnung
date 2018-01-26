@@ -8,6 +8,7 @@ import notenberechnung.shared.CommonSettings;
 import notenberechnung.shared.NotenberechnungAdministration;
 import notenberechnung.shared.NotenberechnungAdministrationAsync;
 import notenberechnung.shared.bo.Student;
+import com.google.gwt.user.client.rpc.RemoteService;
 
 public class ClientsideSettings extends CommonSettings{
 

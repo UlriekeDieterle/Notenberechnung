@@ -2,21 +2,25 @@ package notenberechnung.shared;
 
 import java.util.Vector;
 
+import com.google.gwt.user.client.rpc.RemoteService;
+
 import notenberechnung.shared.bo.Modul;
 import notenberechnung.shared.bo.Modulbelegung;
 import notenberechnung.shared.bo.Student;
 
-public interface NotenberechnungAdministration {
+public interface NotenberechnungAdministration extends RemoteService{
 
 	Student login(String requestUri) throws IllegalArgumentException;
 
-	Student createStudent(int id, String vorname, String nachname, String email, int gebdatum, String kuerzel,
+	void init() throws IllegalArgumentException;
+	
+	Student createStudent(int id, String vorname, String nachname, String email, String kuerzel,
 			String studiengang) throws IllegalArgumentException;
 
 	void delete(Student student) throws IllegalArgumentException;
 
 	void save(Student student) throws IllegalArgumentException;
-
+	
 	Vector<Student> getAllProfiles() throws IllegalArgumentException;
 
 	Student getStudentByID(int id) throws IllegalArgumentException;
@@ -59,7 +63,6 @@ public interface NotenberechnungAdministration {
 	int erreichteECTSausgeben(Student s) throws IllegalArgumentException;
 
 	String fehlendeECTSberechnen(Student s) throws IllegalArgumentException;
-
 	
 	
 
